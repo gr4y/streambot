@@ -5,7 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "streambot"
-    gem.summary = %Q{simple gem for retweeting tweets with specified keywords on twitter}
+    gem.summary = %Q{retweeting tweets with specified keywords on twitter}
     gem.description = %Q{a simple gem that tracks several keywords via twitter streaming api and re-publish it on twitter}
     gem.email = "swessel@gr4yweb.de"
     gem.homepage = "http://github.com/gr4y/streambot"
