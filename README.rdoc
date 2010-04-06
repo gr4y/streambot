@@ -3,11 +3,11 @@
 streambot is using (http://github.com/intridea/tweetstream) for simple access to twitter streaming api
 streambot is still far away from production usage
 
-== Installation ==
+== Installation
 
 	gem install streambot
 	
-== Usage ==
+== Usage
 
 	require 'streambot'
 	
@@ -16,7 +16,7 @@ streambot is still far away from production usage
 	
 == Todo ==
 	
-* add retweet feature
+* add retweet feature for twitter
 	
 == Note on Patches/Pull Requests
  
