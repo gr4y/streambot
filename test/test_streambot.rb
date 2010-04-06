@@ -1,7 +1,10 @@
-require 'helper'
+require 'rubygems'
+require 'test/unit'
 
 class TestStreambot < Test::Unit::TestCase
-  should "probably rename this file and start testing for real" do
-    flunk "hey buddy, you should probably rename this file and start testing for real"
+  
+  def test_for_truth
+    assert true
   end
+  
 end
