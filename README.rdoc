@@ -1,7 +1,23 @@
 = streambot
 
-Description goes here.
+streambot is using (http://github.com/intridea/tweetstream) for simple access to twitter streaming api
+streambot is still far away from production usage
 
+== Installation ==
+
+	gem install streambot
+	
+== Usage ==
+
+	require 'streambot'
+	
+	bot = StreamBot.new({:username=>'username',:password=>'password'},'apple','ipad','iphone os 4','steve jobs')
+	bot.start
+	
+== Todo ==
+	
+* add retweet feature
+	
 == Note on Patches/Pull Requests
  
 * Fork the project.
