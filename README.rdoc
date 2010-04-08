@@ -14,9 +14,9 @@ streambot is still far away from production usage
 	bot = StreamBot.new({:username=>'username',:password=>'password'},'apple','ipad','iphone os 4','steve jobs')
 	bot.start
 	
-== Todo ==
+== Todo
 	
-* add retweet feature for twitter
+* oauth authentication
 	
 == Note on Patches/Pull Requests
  
