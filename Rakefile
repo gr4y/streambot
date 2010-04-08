@@ -10,6 +10,9 @@ begin
     gem.email = "swessel@gr4yweb.de"
     gem.homepage = "http://github.com/gr4y/streambot"
     gem.authors = ["Sascha Wessel"]
+    gem.require_path = 'lib'
+    gem.files = %w(Rakefile) + Dir.glob("{lib}/**/*")
+    
     # Dependency for dealing with twitter streaming API
     gem.add_dependency "tweetstream",">= 1.0.4"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
