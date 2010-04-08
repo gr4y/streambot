@@ -1,17 +1,19 @@
 require 'rubygems'
 require 'tweetstream'
+require 'retweet'
 
 class StreamBot
   
   def initialize(auth, *keywords)
-    #@client = Grackle::Client.new(auth)
     @stream = TweetStream::Client.new(auth[:username],auth[:password])
+    @retweet = Retweet.new(auth)
     @keywords=keywords.join(',')
   end
   
   def start
     @stream.track(@keywords) do |status|
-      puts "#{status.text} from [#{status.user.screen_name}]"
+      puts "#{status.text} - #{status.id}"
+      @retweet.retweet(status.id)
     end  
   end  
   
