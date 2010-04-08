@@ -5,6 +5,8 @@ streambot is still far away from production usage
 
 == Installation
 
+the streambot gem is available on rubygems.org - http://rubygems.org/gems/streambot
+
 	gem install streambot
 	
 == Usage
