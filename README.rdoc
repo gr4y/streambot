@@ -12,7 +12,9 @@ the streambot gem is available on rubygems.org - http://rubygems.org/gems/stream
 
 	require 'streambot'
 	
-	bot = StreamBot.new({:username=>'username',:password=>'password'},'apple','ipad','iphone os 4','steve jobs')
+	@auth = {:username=>'username',:password=>'password'}
+	@blacklist = ['mac_rt','apple_rt']
+	bot = StreamBot.new(@auth, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
 	bot.start
 	
 == Todo
