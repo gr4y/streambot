@@ -22,7 +22,7 @@ class StreamBot
     @stream.track(@keywords) do |status|
       # if status.user is NOT in blacklist then retweet it
       if !@blacklist.include?(status.user) 
-        #puts "#{status.text} - #{status.id}"
+         #puts "#{status.text}"
         @retweet.retweet(status.id)
       end
     end  
