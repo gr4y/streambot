@@ -1,6 +1,8 @@
 require 'net/http'
 require 'open-uri'
 
+# wrapper class for dealing with twitters native retweet api
+# it simply connects to twitter api via http auth basic api with given credentials
 class Retweet
   
   # intitialize method aka constructor
@@ -13,12 +15,15 @@ class Retweet
   def retweet(id)
     url = URI.parse("http://api.twitter.com/1/statuses/retweet/#{id}.json")
     req = Net::HTTP::Post.new(url.path)
+    # set credentials
     req.basic_auth @auth[:username],@auth[:password]
+    # connect
     res = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
     case res
-      when Net::HTTPSuccess, Net::HTTPRedirection
       #OK
+      when Net::HTTPSuccess, Net::HTTPRedirection
     else
+      # when connection wasn't successful print error message
       res.error!
     end
   end
