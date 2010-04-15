@@ -2,7 +2,7 @@ require 'net/http'
 require 'open-uri'
 
 # wrapper class for dealing with twitters native retweet api
-# it simply connects to twitter api via http auth basic api with given credentials
+# it simply connects to twitter api via http basic auth with given credentials
 class Retweet
   
   # intitialize method aka constructor
