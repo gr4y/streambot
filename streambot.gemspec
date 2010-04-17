@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{streambot}
-  s.version = "0.2.3"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sascha Wessel"]
@@ -14,12 +14,12 @@ Gem::Specification.new do |s|
   s.email = %q{swessel@gr4yweb.de}
   s.extra_rdoc_files = [
     "LICENSE",
-    "README.rdoc"
+     "README.rdoc"
   ]
   s.files = [
     "Rakefile",
-    "lib/retweet.rb",
-    "lib/streambot.rb"
+     "lib/retweet.rb",
+     "lib/streambot.rb"
   ]
   s.homepage = %q{http://github.com/gr4y/streambot}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   s.summary = %q{retweeting tweets with specified keywords on twitter}
   s.test_files = [
     "test/test_streambot.rb",
-    "test/test_retweet.rb"
+     "test/test_retweet.rb"
   ]
 
   if s.respond_to? :specification_version then
