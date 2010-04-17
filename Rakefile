@@ -15,9 +15,9 @@ begin
     
     # Dependency for dealing with twitter streaming API
     gem.add_dependency "tweetstream",">= 1.0.4"
+    gem.add_development_dependency "webmock",">= 1.0.0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
-  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
@@ -42,9 +42,8 @@ rescue LoadError
   end
 end
 
-task :test => :check_dependencies
-
-task :default => :test
+task :default => [:check_dependencies,:test]
+task :build_gem => [:test,:build]
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
