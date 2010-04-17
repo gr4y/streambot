@@ -20,11 +20,11 @@ class Retweet
     # connect
     res = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
     case res
-      #OK
       when Net::HTTPSuccess, Net::HTTPRedirection
+      return res
     else
       # when connection wasn't successful print error message
-      res.error!
+      puts res.error!
     end
   end
   
