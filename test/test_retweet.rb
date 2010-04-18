@@ -1,23 +1,19 @@
-require 'rubygems'
-require 'test/unit'
-require 'webmock'
 require 'retweet'
-
-include WebMock
+require 'base_test'
 
 # the test for testing retweet functionality
-class TestRetweet <  Test::Unit::TestCase
+class TestRetweet <  BaseTest
   
   # setup the test 
   def setup
-    # authentication to my test-account on twitter
-    auth = {:username=>'gr4ydev',:password=>'afe5fek3'}
+    # BaseTest::setup is called  
+    super
     # actually used one of my own tweets
     @id = 12355936428
     # initialize retweet
-    @retweet = Retweet.new(auth)
+    @retweet = Retweet.new(@auth)
     # stubbing (actually webmock does the magic here)
-    stub_request(:post, "http://#{auth[:username]}:#{auth[:password]}@api.twitter.com/1/statuses/retweet/#{@id}.json").to_return(:body => 'content')
+    stub_request(:post, "http://#{@auth[:username]}:#{@auth[:password]}@api.twitter.com/1/statuses/retweet/#{@id}.json").to_return(:body => 'content')
   end
   
   # teardown the test
