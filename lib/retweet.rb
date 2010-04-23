@@ -13,7 +13,7 @@ class Retweet
   
   # retweets the status with given id
   def retweet(id)
-    url = URI.parse("http://api.twitter.com/1/statuses/retweet/#{id}.json")
+    url = URI.parse("https://api.twitter.com/1/statuses/retweet/#{id}.json")
     req = Net::HTTP::Post.new(url.path)
     # set credentials
     req.basic_auth @auth[:username],@auth[:password]
@@ -23,8 +23,7 @@ class Retweet
       when Net::HTTPSuccess, Net::HTTPRedirection
       return res
     else
-      # when connection wasn't successful print error message
-      puts res.error!
+      res.error!
     end
   end
   

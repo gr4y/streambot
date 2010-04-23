@@ -5,20 +5,16 @@ require 'base_test'
 class TestRetweet <  BaseTest
   
   # setup the test 
-  def setup
-    # BaseTest::setup is called  
+  def setup  
     super
-    # actually used one of my own tweets
     @id = 12355936428
-    # initialize retweet
     @retweet = Retweet.new(@auth)
-    # stubbing (actually webmock does the magic here)
-    stub_request(:post, "http://#{@auth[:username]}:#{@auth[:password]}@api.twitter.com/1/statuses/retweet/#{@id}.json").to_return(:body => 'content')
+    stub_request(:post, "http://#{@auth[:username]}:#{@auth[:password]}@api.twitter.com:443/1/statuses/retweet/#{@id}.json").to_return(:body => 'content')
   end
   
   # teardown the test
+  # nil all instance variables
   def teardown
-    # nil all recent variables
     @id, @retweet = nil
   end
   
