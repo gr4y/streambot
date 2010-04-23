@@ -9,7 +9,7 @@ class TestRetweet <  BaseTest
     super
     @id = 12355936428
     @retweet = Retweet.new(@auth)
-    stub_request(:post, "http://#{@auth[:username]}:#{@auth[:password]}@api.twitter.com:443/1/statuses/retweet/#{@id}.json").to_return(:body => 'content')
+    stub_request(:post, "http://#{@auth[:username]}:#{@auth[:password]}@api.twitter.com:/1/statuses/retweet/#{@id}.json").to_return(:body => 'content')
   end
   
   # teardown the test
