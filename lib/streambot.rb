@@ -21,8 +21,8 @@ class StreamBot
     # starting to track the keywords via tweetstream
     @stream.track(@keywords) do |status|
       # if status.user is NOT in blacklist then retweet it
-      if !@blacklist.include?(status.user) 
-         #puts "#{status.text}"
+      if !@blacklist.include?(status.user.screen_name) 
+         #puts "#{status.text} ##{status.id}"
         @retweet.retweet(status.id)
       end
     end  
