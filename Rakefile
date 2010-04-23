@@ -16,6 +16,7 @@ begin
     # Dependency for dealing with twitter streaming API
     gem.add_dependency "tweetstream",">= 1.0.4"
     gem.add_development_dependency "webmock",">= 1.0.0"
+    gem.add_development_dependency "rcov",">= 0.9.8"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
@@ -42,13 +43,12 @@ rescue LoadError
   end
 end
 
-task :default => [:check_dependencies,:test]
-task :build_gem => [:test,:build]
+task :build_gem => [:test,:rdoc,:build]
+task :default => [:check_dependencies,:rcov,:build_gem]
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "streambot #{version}"
   rdoc.rdoc_files.include('README*')

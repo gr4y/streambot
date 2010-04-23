@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{streambot}
-  s.version = "0.2.4"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sascha Wessel"]
-  s.date = %q{2010-04-17}
+  s.date = %q{2010-04-23}
   s.description = %q{a simple gem that tracks several keywords via twitter streaming api and re-publish it on twitter}
   s.email = %q{swessel@gr4yweb.de}
   s.extra_rdoc_files = [
@@ -27,7 +27,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{retweeting tweets with specified keywords on twitter}
   s.test_files = [
-    "test/test_streambot.rb",
+    "test/base_test.rb",
+     "test/test_streambot.rb",
      "test/test_retweet.rb"
   ]
 
@@ -37,14 +38,20 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<tweetstream>, [">= 1.0.4"])
+      s.add_runtime_dependency(%q<log4r>, [">= 1.1.7"])
       s.add_development_dependency(%q<webmock>, [">= 1.0.0"])
+      s.add_development_dependency(%q<rcov>, [">= 0.9.8"])
     else
       s.add_dependency(%q<tweetstream>, [">= 1.0.4"])
+      s.add_dependency(%q<log4r>, [">= 1.1.7"])
       s.add_dependency(%q<webmock>, [">= 1.0.0"])
+      s.add_dependency(%q<rcov>, [">= 0.9.8"])
     end
   else
     s.add_dependency(%q<tweetstream>, [">= 1.0.4"])
+    s.add_dependency(%q<log4r>, [">= 1.1.7"])
     s.add_dependency(%q<webmock>, [">= 1.0.0"])
+    s.add_dependency(%q<rcov>, [">= 0.9.8"])
   end
 end
 
