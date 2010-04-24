@@ -1,13 +1,14 @@
 = streambot
 
-streambot is using tweetstream (http://github.com/intridea/tweetstream) for simple access to twitter streaming api
+streambot is using tweetstream[http://github.com/intridea/tweetstream] for simple access to twitter streaming api
 
 == Installation
 
-the streambot gem is available on rubygems.org - http://rubygems.org/gems/streambot
-
-	gem install streambot
+the streambot gem is available on rubygems.org[http://rubygems.org/gems/streambot]
+to get streambot installed, you simply need to run
 	
+	gem install streambot	
+		
 == Usage
 
 	require 'streambot'
@@ -17,12 +18,20 @@ the streambot gem is available on rubygems.org - http://rubygems.org/gems/stream
 	bot = StreamBot::Tracker.new(@auth, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
 	bot.start
 	
-== Todo
-	
-All todos are listed in issue-tracker and labeled with todo (http://github.com/gr4y/streambot/issues/labels/todo) 
-	
-== Note on Patches/Pull Requests
+
+== Contribution
+=== Testing
  
+All Tests should inherit from StreamBot::BaseTest
+	
+=== Feature Requests / Issues
+
+If you ran into some errors? Then don't be shy and file an issue in the issue-tracker[http://github.com/gr4y/streambot/issues]
+Maybe you have a feature request then file an issue too.
+	
+=== Note on Patches/Pull Requests
+
+You want to add a feature or you want to patch streambot? 
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
