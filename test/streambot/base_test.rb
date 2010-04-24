@@ -9,14 +9,13 @@ require 'streambot'
 module StreamBot
   # The base of all tests in this projet
   #
-  # class TestName < StreamBot::BaseTest
+  #   class TestName < StreamBot::BaseTest
   #  
-  #  def setup 
-  #    super
-  #    # implementation goes here
-  #  end
-  #  
-  # end
+  #     def setup 
+  #       super
+  #       # implementation goes here
+  #     end
+  #   end
   class BaseTest < Test::Unit::TestCase
     
     # reading config.yml and assign all keys to instance
