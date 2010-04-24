@@ -29,9 +29,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{retweeting tweets with specified keywords on twitter}
   s.test_files = [
-    "test/base_test.rb",
-     "test/test_streambot.rb",
-     "test/test_retweet.rb"
+    "test/streambot/base_test.rb",
+     "test/streambot/test_retweet.rb",
+     "test/streambot/test_http.rb"
   ]
 
   if s.respond_to? :specification_version then
