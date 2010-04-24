@@ -14,7 +14,7 @@ module StreamBot
     # teardown the test
     # nil all instance variables
     def teardown
-      @id, @retweet = nil
+      @id, @retweet, @auth = nil
     end
     
     # retweet 
