@@ -1,5 +1,5 @@
 .project
 pkg
-test/*.yml
+test/**/*.yml
 coverage
 rdoc
