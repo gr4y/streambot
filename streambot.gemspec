@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{streambot}
-  s.version = "0.2.5"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sascha Wessel"]
-  s.date = %q{2010-04-23}
+  s.date = %q{2010-04-24}
   s.description = %q{a simple gem that tracks several keywords via twitter streaming api and re-publish it on twitter}
   s.email = %q{swessel@gr4yweb.de}
   s.extra_rdoc_files = [
@@ -18,8 +18,10 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "Rakefile",
-     "lib/retweet.rb",
-     "lib/streambot.rb"
+     "lib/streambot.rb",
+     "lib/streambot/http.rb",
+     "lib/streambot/retweet.rb",
+     "lib/streambot/tracker.rb"
   ]
   s.homepage = %q{http://github.com/gr4y/streambot}
   s.rdoc_options = ["--charset=UTF-8"]
