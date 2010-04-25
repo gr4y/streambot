@@ -1,0 +1,17 @@
+
+=== You are upgrading from an earlier version? ===
+
+Maybe you need to change your code a little bit
+	
+=== A simple example how to use streambot ===
+
+	require 'streambot'
+
+	@auth = {:username=>'username',:password=>'password'}
+	@blacklist = ['mac_rt','apple_rt']
+	bot = StreamBot::Tracker.new(@auth, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
+	bot.start
+
+=== streambot is an open source project === 
+
+the code is available on github[http://github/gr4y/streambot] 

@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rake'
 
-begin
+begin  
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "streambot"
@@ -10,6 +10,7 @@ begin
     gem.email = "swessel@gr4yweb.de"
     gem.homepage = "http://github.com/gr4y/streambot"
     gem.authors = ["Sascha Wessel"]
+    gem.post_install_message = File.exist?('USAGE.rdoc') ? File.read('USAGE.rdoc') : ""
     gem.require_path = 'lib'
     gem.files = %w(Rakefile) + Dir.glob("{lib}/**/*")
     
@@ -17,6 +18,7 @@ begin
     gem.add_dependency "tweetstream",">= 1.0.4"
     gem.add_development_dependency "webmock",">= 1.0.0"
     gem.add_development_dependency "rcov",">= 0.9.8"
+    
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
