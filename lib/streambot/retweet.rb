@@ -13,8 +13,7 @@ module StreamBot
     # retweets the status with given id
     def retweet(id)
       LOG.debug("#{self.class}#retweet")
-      url = URI.parse("#{$BASE_URL}statuses/retweet/#{id}.json")
-      res = @http.post_with_auth(@auth, url)
+      res = @http.post_with_auth(@auth, "#{$BASE_URL}statuses/retweet/#{id}.json")
       case res
         when Net::HTTPSuccess then return res
       else 

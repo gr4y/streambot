@@ -3,9 +3,10 @@ module StreamBot
   class HTTP
     # initialize request with basic authentication and send
     def post_with_auth(auth, url)
-      request = init_request(url)
+      uri = URI.parse(url)
+      request = init_request(uri)
       request.basic_auth auth[:username],auth[:password]
-      post_request(request,url)
+      post_request(request,uri)
     end
         
     private
@@ -19,6 +20,8 @@ module StreamBot
     
     # initialize an Net::HTTP::Post Request
     def init_request(url)
+      LOG.debug("#{self.class}#init_request(#{url})")
+      puts url.inspect
       Net::HTTP::Post.new(url.path)
     end
   end
