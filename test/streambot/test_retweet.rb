@@ -6,7 +6,6 @@ module StreamBot
     # setup the test 
     def setup  
       super
-      @id = 12355936428
       @retweet = StreamBot::Retweet.new(@auth)
       stub_request(:post, "http://#{@auth[:username]}:#{@auth[:password]}@api.twitter.com/1/statuses/retweet/#{@id}.json").to_return(:body => 'content')
     end
@@ -14,7 +13,7 @@ module StreamBot
     # teardown the test
     # nil all instance variables
     def teardown
-      @id, @retweet, @auth = nil
+      @id, @retweet = nil
     end
     
     # retweet 
