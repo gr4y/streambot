@@ -1,9 +1,9 @@
 
-=== You are upgrading from an earlier version? ===
+=== You are upgrading from an earlier version?
 
 Maybe you need to change your code a little bit
 	
-=== A simple example how to use streambot ===
+=== A simple example how to use streambot
 
 	require 'streambot'
 
@@ -12,6 +12,6 @@ Maybe you need to change your code a little bit
 	bot = StreamBot::Tracker.new(@auth, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
 	bot.start
 
-=== streambot is an open source project === 
+=== streambot is an open source project
 
-the code is available on github[http://github/gr4y/streambot] 
+the code is available on github[http://github.com/gr4y/streambot] 
