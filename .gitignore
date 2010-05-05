@@ -1,4 +1,5 @@
 .project
+.idea
 pkg
 test/**/*.yml
 coverage
