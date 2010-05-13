@@ -18,6 +18,7 @@ begin
     gem.add_dependency "tweetstream",">= 1.0.4"
     gem.add_development_dependency "webmock",">= 1.0.0"
     gem.add_development_dependency "rcov",">= 0.9.8"
+    gem.add_development_dependency "reek",">= 1.2.8"
     
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
@@ -46,7 +47,7 @@ rescue LoadError
 end
 
 task :build_gem => [:test,:rdoc,:build]
-task :default => [:check_dependencies,:rcov,:build_gem]
+task :default => [:check_dependencies,:rcov,:reek,:build_gem]
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
@@ -55,4 +56,9 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "streambot #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+require 'reek/rake/task'
+Reek::Rake::Task.new do |t|
+  t.fail_on_error = false
 end
