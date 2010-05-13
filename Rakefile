@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rake'
 
-begin  
+begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "streambot"

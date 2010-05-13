@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sascha Wessel"]
-  s.date = %q{2010-04-25}
+  s.date = %q{2010-05-13}
   s.description = %q{a simple gem that tracks several keywords via twitter streaming api and re-publish it on twitter}
   s.email = %q{swessel@gr4yweb.de}
   s.extra_rdoc_files = [
@@ -25,11 +25,11 @@ Gem::Specification.new do |s|
   ]
   s.homepage = %q{http://github.com/gr4y/streambot}
   s.post_install_message = %q{
-=== You are upgrading from an earlier version? ===
+=== You are upgrading from an earlier version?
 
 Maybe you need to change your code a little bit
 	
-=== A simple example how to use streambot ===
+=== A simple example how to use streambot
 
 	require 'streambot'
 
@@ -38,9 +38,9 @@ Maybe you need to change your code a little bit
 	bot = StreamBot::Tracker.new(@auth, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
 	bot.start
 
-=== streambot is an open source project === 
+=== streambot is an open source project
 
-the code is available on github[http://github/gr4y/streambot] }
+the code is available on github[http://github.com/gr4y/streambot] }
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
