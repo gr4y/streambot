@@ -3,7 +3,7 @@ module StreamBot
   class Tracker
     # the initialization method aka the constructor
     def initialize(auth, blacklist, *keywords)
-      LOG.debug("#{self.class}#initialize")
+      LOG.debug("Tracker#initialize")
       @stream = TweetStream::Client.new(auth[:username],auth[:password])
       # initializing retweet
       @retweet = StreamBot::Retweet.new(auth) #
@@ -15,13 +15,13 @@ module StreamBot
     
     # start the bot
     def start
-      LOG.debug("#{self.class}#start")
+      LOG.debug("Tracker#start")
       # starting to track the keywords via tweetstream
       @stream.track(@keywords) do |status|
         username = status.user.screen_name
         # if status.user is NOT in blacklist then retweet it
         if !@blacklist.include?(username)
-          LOG.debug("#{self.class}#start - retweet ##{status.id} from @#{username}")
+          LOG.debug("Tracker#start - retweet ##{status.id} from @#{username}")
           @retweet.retweet(status.id)
         end
       end  
