@@ -1,6 +1,6 @@
 .project
 .idea
 pkg
-test/**/*.yml
+*.yml
 coverage
 rdoc
