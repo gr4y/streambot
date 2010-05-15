@@ -1,12 +1,14 @@
 require 'rubygems'
 require 'open-uri'
 require 'net/http'
+require 'oauth'
 require 'tweetstream'
 require 'logger'
 
 require 'streambot/tracker'
 require 'streambot/retweet'
 require 'streambot/http'
+require 'streambot/oauth'
 
 module StreamBot  
   LOG = Logger.new(STDOUT)
