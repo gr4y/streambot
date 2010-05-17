@@ -1,4 +1,10 @@
-auth:
-  username: test
-  password: test
+params:
+  auth_type: oauth
+  http:
+    username: username
+    password: password
+  oauth:
+    consumer:
+      key: consumer key
+      secret: consumer secret
 id: 12355936428

@@ -7,6 +7,7 @@ require 'logger'
 
 require 'streambot/tracker'
 require 'streambot/retweet'
+require 'streambot/handler'
 require 'streambot/http'
 require 'streambot/oauth'
 

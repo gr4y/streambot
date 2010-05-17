@@ -6,7 +6,7 @@ module StreamBot
       LOG.debug("Tracker#initialize")
       @stream = TweetStream::Client.new(auth[:username],auth[:password])
       # initializing retweet
-      @retweet = StreamBot::Retweet.new(auth) #
+      @retweet = StreamBot::Retweet.new(auth)
       # get string with keywords comma separated keywords 
       @keywords=keywords.join(',')
       # set blacklist array if not nil

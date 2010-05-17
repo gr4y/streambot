@@ -1,6 +1,6 @@
 module StreamBot
   # oauth communication wrapper
-  class OAuth
+  class OAuth < StreamBot::Handler
     TWITTER_OAUTH_SPEC = {
             :site => 'http://api.twitter.com',
             :request_token_pat1h => '/oauth/request_token',
@@ -11,10 +11,9 @@ module StreamBot
     ACCESS_TOKEN = ::File.dirname(::File.expand_path(::File.dirname(__FILE__))) + ::File::SEPARATOR + 'access_token.yml'
 
     # :nodoc:
-    def initialize
-      load_config
-      @oauth = @config['auth']['oauth']
-      @oauth_consumer = ::OAuth::Consumer.new(@oauth['consumer']['key'], @oauth['consumer']['secret'], TWITTER_OAUTH_SPEC)
+    def initialize(auth)
+      @auth = auth      
+      @oauth_consumer = ::OAuth::Consumer.new(@auth['key'], @auth['secret'], TWITTER_OAUTH_SPEC)
       get_access_token
     end
 
@@ -26,33 +25,24 @@ module StreamBot
     #   the body contains all data you send to twitter
     #     {:status => "a new status"}
     #
-    def post(url, body)
-      response = @access_token.post(url, body)
+    def post(path, body)
+      LOG.debug("post #{body} to \"#{path}\"")
+      response = @access_token.post(path, body)
       parse_response(response)
     end
 
     # get data from twitter api
     #
-    #   url takes the path like
+    #   path takes the path like
     #     '/statuses/user_timeline.format'
     #
-    def get(url)
-      response = @access_token.get(url)
+    def get(path)
+      LOG.debug("get data form \"#{path}\"")
+      response = @access_token.get(path)
       parse_response(response)
     end
 
     private
-    def parse_response(object)
-      #LOG.debug(object.class)
-      case object
-        when ::Net::HTTPUnauthorized
-          ::File.delete(ACCESS_TOKEN)
-          raise 'user revoked oauth connection'
-        when ::Net::HTTPOK
-          object.body
-      end
-    end
-
     # get the request token from oauth consumer
     def get_request_token
       @oauth_consumer.get_request_token
@@ -81,11 +71,6 @@ module StreamBot
       print "Enter the number they give you: "
       pin = STDIN.readline.chomp
       @access_token = @request_token.get_access_token(:oauth_verifier => pin)
-    end
-
-    # load both, config and access token from its yml file
-    def load_config
-      @config = ::YAML.load_file('config.yml')
     end
   end
 end

@@ -1,24 +1,19 @@
 module StreamBot
   # wrapper class for dealing with twitters native retweet api
   class Retweet
-    # api base url   
-    $BASE_URL = "http://api.twitter.com/1/" 
-    
     # intitialize method aka constructor
-    def initialize(auth)
-      @auth = auth
-      @http = StreamBot::HTTP.new
+    def initialize(params)
+      auth_type = params['auth_type']
+      auth_params = params[auth_type]
+      case auth_type
+        when "oauth" then @handler = StreamBot::OAuth.new(auth_params)
+        when "http" then @handler = StreamBot::HTTP.new(auth_params)
+      end
     end
-    
+
     # retweets the status with given id
     def retweet(id)
-      LOG.debug("#{self.class}#retweet")
-      res = @http.post_with_auth(@auth, "#{$BASE_URL}statuses/retweet/#{id}.json")
-      case res
-        when Net::HTTPSuccess then return res
-      else 
-        res.error!
-      end
+      @handler.post("/statuses/retweet/#{id}.json",nil)
     end
   end
 end

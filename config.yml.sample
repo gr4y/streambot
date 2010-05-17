@@ -1,8 +1,0 @@
-auth:
-  http:
-    username: test
-    password: test
-  oauth:
-    consumer:
-      key: [your consumer key]
-      secret: [your consumer secret]
