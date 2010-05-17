@@ -4,7 +4,6 @@ params:
     username: username
     password: password
   oauth:
-    consumer:
-      key: consumer key
-      secret: consumer secret
+    key: consumer key
+    secret: consumer secret
 id: 12355936428
