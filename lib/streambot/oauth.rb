@@ -8,7 +8,7 @@ module StreamBot
             :authorize_path => '/oauth/authorize'
     }
 
-    ACCESS_TOKEN = ::File.dirname(::File.expand_path(::File.dirname(__FILE__))) + ::File::SEPARATOR + 'access_token.yml'
+    ACCESS_TOKEN = 'access_token.yml'
 
     # :nodoc:
     def initialize(auth)
