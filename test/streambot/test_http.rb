@@ -8,7 +8,7 @@ module StreamBot
       super
       WebMock.disable_net_connect!
       @http = StreamBot::HTTP.new(@params['http'])
-      stub_request(:post, "http://api.twitter.com/path/to/data").to_return(:body => "response")
+      stub_request(:post, "http://#{@params['http']['username']}:#{@params['http']['password']}@api.twitter.com/path/to/data").to_return(:body => "response")
     end
 
     # test a post with basic authentication

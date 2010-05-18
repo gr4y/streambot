@@ -35,7 +35,7 @@ module StreamBot
 
     private
     def do_request(request)
-      request.basic_auth @auth[:username], @auth[:password]
+      request.basic_auth @auth['username'], @auth['password']
       response = Net::HTTP.new(@uri.host, @uri.port).start do |http|
         http.request(request)
       end
