@@ -4,6 +4,7 @@ require 'net/http'
 require 'oauth'
 require 'tweetstream'
 require 'logger'
+require 'yaml'
 
 require 'streambot/tracker'
 require 'streambot/retweet'
