@@ -2,11 +2,12 @@ module StreamBot
   # The Tracker class that provides a start and a stop method 
   class Tracker
     # the initialization method aka the constructor
-    def initialize(auth, blacklist, *keywords)
+    def initialize(params, blacklist, *keywords)
       LOG.debug("Tracker#initialize")
-      @stream = TweetStream::Client.new(auth[:username],auth[:password])
+      http_auth = params['http']
+      @stream = TweetStream::Client.new(http_auth['username'],http_auth['password'])
       # initializing retweet
-      @retweet = StreamBot::Retweet.new(auth)
+      @retweet = StreamBot::Retweet.new(params)
       # get string with keywords comma separated keywords 
       @keywords=keywords.join(',')
       # set blacklist array if not nil
