@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sascha Wessel"]
-  s.date = %q{2010-05-17}
+  s.date = %q{2010-05-18}
   s.description = %q{a simple gem that tracks several keywords via twitter streaming api and re-publish it on twitter}
   s.email = %q{swessel@gr4yweb.de}
   s.extra_rdoc_files = [
@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "Rakefile",
-     "lib/access_token.yml",
      "lib/streambot.rb",
      "lib/streambot/handler.rb",
      "lib/streambot/http.rb",
@@ -36,10 +35,13 @@ Maybe you need to change your code a little bit
 
 	require 'streambot'
 
-	@auth = {:username=>'username',:password=>'password'}
-	@blacklist = ['mac_rt','apple_rt']
-	bot = StreamBot::Tracker.new(@auth, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
-	bot.start
+    @params = {"auth_type" => "oauth",
+        "oauth" => {"key" => "consumer key", "secret" => "consumer secret"},
+        "http" => {"username" => "username", "password" => "password"}
+    }
+    @blacklist = ['mac_rt','apple_rt']
+    bot = StreamBot::Tracker.new(@params, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
+    bot.start
 
 === streambot is an open source project
 
