@@ -42,7 +42,8 @@ module StreamBot
       parse_response(response)
     end
 
-    # initialize an Net::HTTP::Post Request
+    # initialize an Net::HTTP::GET or Net::HTTP::POST request
+    # depends on type param
     def init_request(path, type)
       @url = "#{BASE_URL}#{path}"
       @uri = URI.parse(@url)
