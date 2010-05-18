@@ -7,10 +7,13 @@ Maybe you need to change your code a little bit
 
 	require 'streambot'
 
-	@auth = {:username=>'username',:password=>'password'}
-	@blacklist = ['mac_rt','apple_rt']
-	bot = StreamBot::Tracker.new(@auth, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
-	bot.start
+    @params = {"auth_type" => "oauth",
+        "oauth" => {"key" => "consumer key", "secret" => "consumer secret"},
+        "http" => {"username" => "username", "password" => "password"}
+    }
+    @blacklist = ['mac_rt','apple_rt']
+    bot = StreamBot::Tracker.new(@params, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
+    bot.start
 
 === streambot is an open source project
 
