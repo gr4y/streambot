@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sascha Wessel"]
-  s.date = %q{2010-05-18}
+  s.date = %q{2010-06-06}
   s.description = %q{a simple gem that tracks several keywords via twitter streaming api and re-publish it on twitter}
   s.email = %q{swessel@gr4yweb.de}
   s.extra_rdoc_files = [
@@ -26,26 +26,12 @@ Gem::Specification.new do |s|
      "lib/streambot/tracker.rb"
   ]
   s.homepage = %q{http://github.com/gr4y/streambot}
-  s.post_install_message = %q{
-=== You are upgrading from an earlier version?
+  s.post_install_message = %q{=== You are upgrading from an earlier version?
 
-Maybe you need to change your code a little bit
-	
-=== A simple example how to use streambot
+Then you maybe need to change your code.
+In version 0.4.0 oauth was introduced and I recommend you to read the README
 
-	require 'streambot'
-
-    @params = {"auth_type" => "oauth",
-        "oauth" => {"key" => "consumer key", "secret" => "consumer secret"},
-        "http" => {"username" => "username", "password" => "password"}
-    }
-    @blacklist = ['mac_rt','apple_rt']
-    bot = StreamBot::Tracker.new(@params, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
-    bot.start
-
-=== streambot is an open source project
-
-the code is available on github[http://github.com/gr4y/streambot] }
+code is available on github[http://github.com/gr4y/streambot] }
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}

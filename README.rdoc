@@ -28,7 +28,8 @@ Twitter is shutting down http basic authentication with June 30th 2010. But only
 So we still need the http basic authentication credentials for tracking the keywords after June 30th, but only for tracking and not for retweeting. So I introduced a new way of configuration, the params attribute that you need to pass into Tracker. Actually I don't know what happens when twitter is shutting down the http basic authentication.
 
 ==== auth_type
-The auth type is the authentication mechanism you want to use for retweeting
+The auth type is the authentication mechanism you want to use for retweeting.
+*oauth* or *http*
 
 ==== oauth
 *Warning!* You need to register an application of the type desktop application on http://dev.twitter.com first!
