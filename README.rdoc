@@ -21,6 +21,10 @@ to get streambot installed, you simply need to run
 	bot = StreamBot::Tracker.new(@params, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
 	bot.start
 
+=== Documentation
+
+The full rdoc is available on rdoc.info[http://rdoc.info/projects/gr4y/streambot]
+
 === Configuration
 
 Twitter is shutting down http basic authentication with June 30th 2010. But only for the REST API. The Streaming API which the tracker is using still works with http basic authentication only. 
