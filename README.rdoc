@@ -27,9 +27,9 @@ The full rdoc is available on rdoc.info[http://rdoc.info/projects/gr4y/streambot
 
 === Configuration
 
-Twitter is shutting down http basic authentication with June 30th 2010. But only for the REST API. The Streaming API which the tracker is using still works with http basic authentication only. 
+Twitter is shutting down http basic authentication with August 16th 2010. But only for the REST API. The Streaming API which the tracker is using still works with http basic authentication only.
 
-So we still need the http basic authentication credentials for tracking the keywords after June 30th, but only for tracking and not for retweeting. So I introduced a new way of configuration, the params attribute that you need to pass into Tracker. Actually I don't know what happens when twitter is shutting down the http basic authentication.
+So we still need the http basic authentication credentials for tracking the keywords after August 16th, but only for tracking and not for retweeting. So I introduced a new way of configuration, the params attribute that you need to pass into Tracker. Actually I don't know what happens when twitter is shutting down the http basic authentication.
 
 ==== auth_type
 The auth type is the authentication mechanism you want to use for retweeting.
@@ -44,6 +44,12 @@ The auth type is the authentication mechanism you want to use for retweeting.
 ==== http
 *username*:: Your login username
 *password*:: Your login password
+
+==== filters
+
+*key*:: this should just hold an description of your filter
+*type*:: USER, CONTENT or LANGUAGE
+*value*:: a string, thats the content that should be filtered
 
 I wrote this stuff into my config.yml and load the params with 
 
