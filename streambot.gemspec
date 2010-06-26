@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{streambot}
-  s.version = "0.4.0"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sascha Wessel"]
-  s.date = %q{2010-06-06}
+  s.date = %q{2010-06-26}
   s.description = %q{a simple gem that tracks several keywords via twitter streaming api and re-publish it on twitter}
   s.email = %q{swessel@gr4yweb.de}
   s.extra_rdoc_files = [
@@ -37,7 +37,8 @@ code is available on github[http://github.com/gr4y/streambot] }
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{retweeting tweets with specified keywords on twitter}
   s.test_files = [
-    "test/streambot/base_test.rb",
+    "test/streambot/test_filter.rb",
+     "test/streambot/base_test.rb",
      "test/streambot/test_oauth.rb",
      "test/streambot/test_retweet.rb",
      "test/streambot/test_http.rb"
