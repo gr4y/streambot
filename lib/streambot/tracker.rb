@@ -24,13 +24,13 @@ module StreamBot
       # starting to track the keywords via tweetstream
       @stream.track(@keywords) do |status|
         username = status.user.screen_name
-
         # if status.user is NOT in blacklist or filters don't match then retweet it
         if @blacklist.nil? || !@blacklist.include?(username)
           @filters.each do |key, value|
             if !match?(status, value)
               LOG.debug("Tracker#start - retweet ##{status.id} from @#{username}")
               @retweet.retweet(status.id)
+              break
             else
               LOG.debug("Tracker#start - filter #{key} matched!")
             end
