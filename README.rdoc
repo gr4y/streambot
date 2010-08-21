@@ -6,9 +6,17 @@ streambot is using tweetstream[http://github.com/intridea/tweetstream] for simpl
 
 the streambot gem is available on rubygems.org[http://rubygems.org/gems/streambot]
 to get streambot installed, you simply need to run
-	
-	gem install streambot	
-		
+
+=== stable release
+
+	gem install streambot
+
+=== beta release
+
+if you are insane and want to try out the actual beta release then run
+
+	gem install streambot --pre
+
 == Usage
 
 	require 'streambot'
