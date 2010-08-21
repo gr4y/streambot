@@ -47,7 +47,7 @@ module StreamBot
         end
         before_retweet
         LOG.debug("Tracker#start - retweet ##{status.id} from @#{username}")
-        # @retweet.retweet(status.id)
+        @retweet.retweet(status.id)
       end
     end
 
