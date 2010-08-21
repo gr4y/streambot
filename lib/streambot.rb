@@ -6,11 +6,12 @@ require 'tweetstream'
 require 'logger'
 require 'yaml'
 
-require 'streambot/tracker'
+require 'streambot/callbacks'
 require 'streambot/retweet'
 require 'streambot/handler'
 require 'streambot/http'
 require 'streambot/oauth'
+require 'streambot/tracker'
 
 module StreamBot  
   LOG = Logger.new(STDOUT)

@@ -48,6 +48,7 @@ rescue LoadError
 end
 
 task :build_gem => [:test,:rdoc,:build]
+task :install_gem => [:build_gem,:install]
 task :default => [:check_dependencies,:rcov,:reek,:build_gem]
 
 require 'rake/rdoctask'
