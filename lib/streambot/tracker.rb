@@ -60,7 +60,7 @@ module StreamBot
       elsif @type == "CONTENT" then
         status.text.include?(@value)
       elsif @type == "LANGUAGE" then
-        status.lang.eql?(@value)
+        status.user.lang.eql?(@value)
       end
     end
 
