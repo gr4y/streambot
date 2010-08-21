@@ -42,12 +42,13 @@ module StreamBot
               match_filter
               LOG.debug("Tracker#start - filter #{key} matched!")
               break
+            else
+              before_retweet
+              LOG.debug("Tracker#start - retweet ##{status.id} from @#{username}")
+              @retweet.retweet(status.id)   
             end
           end
         end
-        before_retweet
-        LOG.debug("Tracker#start - retweet ##{status.id} from @#{username}")
-        @retweet.retweet(status.id)
       end
     end
 
