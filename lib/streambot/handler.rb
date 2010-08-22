@@ -1,5 +1,5 @@
 module StreamBot
-  # :nodoc:
+  # some important code for the communication wrappers
   class Handler
     # parse an response 
     def parse_response(object)
