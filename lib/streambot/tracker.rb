@@ -36,17 +36,19 @@ module StreamBot
         username = status.user.screen_name
         # if status.user is NOT in blacklist or filters don't match then retweet it
         before_match
+        matched = false
         if (@blacklist.nil? || !@blacklist.include?(username)) && !@filters.nil?
           @filters.each do |key, value|
-            if match?(status, value)
+            matched = match?(status, value)
+            if matched
               match_filter
               LOG.debug("Tracker#start - filter #{key} matched!")
-              break
-            else
-              before_retweet
-              LOG.debug("Tracker#start - retweet ##{status.id} from @#{username}")
-              @retweet.retweet(status.id)   
             end
+          end
+          if !matched
+            before_retweet
+            LOG.debug("Tracker#start - retweet ##{status.id} from @#{username}")
+            @retweet.retweet(status.id)
           end
         end
       end
