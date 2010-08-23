@@ -40,12 +40,13 @@ module StreamBot
         if (@blacklist.nil? || !@blacklist.include?(username)) && !@filters.nil?
           @filters.each do |key, value|
             matched = match?(status, value)
-            if matched
+            puts matched
+            if matched == true
               match_filter
               LOG.debug("Tracker#start - filter #{key} matched!")
             end
           end
-          if !matched
+          if matched == false
             before_retweet
             LOG.debug("Tracker#start - retweet ##{status.id} from @#{username}")
             @retweet.retweet(status.id)
@@ -64,6 +65,8 @@ module StreamBot
         status.text.include?(@value)
       elsif @type == "LANGUAGE" then
         status.user.lang.eql?(@value)
+      elsif @type == "SOURCE" then
+        status.source.eql?(@value)
       end
     end
 
