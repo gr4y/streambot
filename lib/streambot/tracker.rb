@@ -40,7 +40,6 @@ module StreamBot
         if (@blacklist.nil? || !@blacklist.include?(username)) && !@filters.nil?
           @filters.each do |key, value|
             matched = match?(status, value)
-            puts matched
             if matched == true
               match_filter
               LOG.debug("Tracker#start - filter #{key} matched!")
