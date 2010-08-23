@@ -65,7 +65,9 @@ module StreamBot
       elsif @type == "LANGUAGE" then
         status.user.lang.eql?(@value)
       elsif @type == "SOURCE" then
-        status.source.eql?(@value)
+        # just a thought at this point:
+        # why the heck is html markup in the source field?
+        status.source.include?(@value)
       end
     end
 
