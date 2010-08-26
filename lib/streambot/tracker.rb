@@ -68,6 +68,8 @@ module StreamBot
         # just a thought at this point:
         # why the heck is html markup in the source field?
         status.source.include?(@value)
+      elsif @type == "TIMEZONE" then
+        status.user.time_zone.eql?(@value)
       end
     end
 
