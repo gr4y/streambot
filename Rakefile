@@ -12,7 +12,7 @@ begin
     gem.authors = ["Sascha Wessel"]
     gem.post_install_message = File.exist?('USAGE.rdoc') ? File.read('USAGE.rdoc') : ""
     gem.require_path = 'lib'
-    gem.files = %w(Rakefile) + Dir.glob("{lib}/**/*")
+    gem.files = %w(Rakefile) + Dir.glob("{lib}/**/*") + %w(VERSION)
     
     # Dependency for dealing with twitter streaming API
     gem.add_dependency "tweetstream",">= 1.0.4"
@@ -48,6 +48,7 @@ rescue LoadError
 end
 
 task :build_gem => [:test,:rdoc,:build]
+task :install_gem => [:build_gem,:install]
 task :default => [:check_dependencies,:rcov,:reek,:build_gem]
 
 require 'rake/rdoctask'
