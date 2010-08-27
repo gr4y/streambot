@@ -1,80 +1,108 @@
-= streambot
-
-streambot is using tweetstream[http://github.com/intridea/tweetstream] for simple access to twitter streaming api
-
-== Installation
+= Installation
 
 the streambot gem is available on rubygems.org[http://rubygems.org/gems/streambot]
 to get streambot installed, you simply need to run
 
-=== stable release
+== stable release
 
-	gem install streambot
+    gem install streambot
 
-=== beta release
+== beta release
 
-if you are insane and want to try out the actual beta release then run
+    gem install streambot --pre
 
-	gem install streambot --pre
-
-== Usage
-
-	require 'streambot'
-
-	@params = {"auth_type" => "oauth",
-	    "oauth" => {"key" => "consumer key", "secret" => "consumer secret"},
-	    "http" => {"username" => "username", "password" => "password"}
-	}
-	@blacklist = ['mac_rt','apple_rt']
-	bot = StreamBot::Tracker.new(@params, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
-	bot.start
-
-=== Documentation
+= Documentation
 
 The full rdoc is available on rdoc.info[http://rdoc.info/projects/gr4y/streambot]
 
-=== Configuration
+= Usage
 
-Twitter is shutting down http basic authentication with August 16th 2010. But only for the REST API. The Streaming API which the tracker is using still works with http basic authentication only.
+    require 'streambot'
 
-So we still need the http basic authentication credentials for tracking the keywords after August 16th, but only for tracking and not for retweeting. So I introduced a new way of configuration, the params attribute that you need to pass into Tracker. Actually I don't know what happens when twitter is shutting down the http basic authentication.
+    @params = {"auth_type" => "oauth",
+        "oauth" => {"key" => "consumer key", "secret" => "consumer secret"},
+        "http" => {"username" => "username", "password" => "password"}
+    }
+    @blacklist = ['mac_rt','apple_rt']
+    bot = StreamBot::Tracker.new(@params, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
+    bot.start
 
-==== auth_type
+= Configuration
+
+Twitter has finally removed the http basic authentication for the REST API.
+The Streaming API, which the tracker is using, still works with http basic authentication only.
+So we still need both, the oauth credentials for retweeting and the http basic authentication credentials for tracking. 
+
+== auth_type
 The auth type is the authentication mechanism you want to use for retweeting.
 *oauth* or *http*
 
-==== oauth
+=== oauth
 *Warning!* You need to register an application of the type desktop application on http://dev.twitter.com first!
 
 *key*:: The consumer key Twitter provides you
 *secret*:: The consumer secret Twitter provides you
 
-==== http
+=== http
 *username*:: Your login username
 *password*:: Your login password
 
-==== filters
+=== filters
+When a filter is matching on an status, then it won't be retweeted.
 
 *key*:: this should just hold an description of your filter
-*type*:: USER, CONTENT or LANGUAGE
+*type*:: the type,
 *value*:: a string, thats the content that should be filtered
+
+----
+These types are actually supported:
+
+*USER*:: The users screenname/nickname *NOT* realname
+*SOURCE*:: The client which the user is using
+*LANGUAGE*:: The language that's set in users profile
+*TIMEZONE*:: The timezone that's set in users profile
+*CONTENT*:: A word the status text could include
+----
 
 I wrote this stuff into my config.yml and load the params with 
 
 	require 'yaml'
 	@params = YAML.load_file('config.yml')
 
-== Contribution
-=== Testing
- 
+== Callbacks
+
+Since version 0.5.0 streambot has an simple callback mechanism.
+
+*before_start*:: is fired before the tracker is running
+*before_match*:: is fired before we start the filtering
+*match_filter*:: is fired when an filter has matched
+*before_retweet*:: is fired before retweeting
+
+=== Examples
+==== before_match
+
+Before filtering we just want to print the status id to the console
+
+    bot = StreamBot::Tracker.new(@params, nil,'nowplaying')
+    bot.before_match do
+        status = bot.instance_variable_get("@status")
+        puts status.id
+    end
+    bot.start
+
+That's just an example. You can do anything you want to do here.
+
+= Contribution
+== Testing
+
 All Tests should inherit from StreamBot::BaseTest
-	
-=== Feature Requests / Issues
+
+== Feature Requests / Issues
 
 If you ran into some errors? Then don't be shy and file an issue in the issue-tracker[http://github.com/gr4y/streambot/issues]
 Maybe you have a feature request then file an issue too.
-	
-=== Note on Patches/Pull Requests
+
+== Note on Patches/Pull Requests
 
 You want to add a feature or you want to patch streambot? 
 * Fork the project.
@@ -85,6 +113,6 @@ You want to add a feature or you want to patch streambot?
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-== Copyright
+= Copyright
 
 Copyright (c) 2010 Sascha Wessel. See LICENSE for details.
