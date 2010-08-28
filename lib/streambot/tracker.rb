@@ -34,24 +34,31 @@ module StreamBot
         # make status an instance variable for callbacks
         @status = status
         username = status.user.screen_name
+        matched = false
         # if status.user is NOT in blacklist or filters don't match then retweet it
         before_match
-        matched = false
         if (@blacklist.nil? || !@blacklist.include?(username)) && !@filters.nil?
           @filters.each do |key, value|
             matched = match?(status, value)
             if matched == true
               match_filter
               LOG.debug("Tracker#start - filter #{key} matched!")
+              break
             end
           end
-          if matched == false
-            before_retweet
-            LOG.debug("Tracker#start - retweet ##{status.id} from @#{username}")
-            @retweet.retweet(status.id)
-          end
+        end
+        if matched == false
+          retweet(status)
         end
       end
+    end
+
+    # retweet the status
+    def retweet(status)
+      before_retweet
+      id = status.id
+      LOG.debug("Tracker#retweet - retweet ##{id} from @#{status.user.screen_name}")
+      @retweet.retweet(id)
     end
 
     # returns true if an filter is matching
