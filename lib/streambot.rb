@@ -9,7 +9,6 @@ require 'yaml'
 require 'streambot/callbacks'
 require 'streambot/retweet'
 require 'streambot/handler'
-require 'streambot/http'
 require 'streambot/oauth'
 require 'streambot/tracker'
 
