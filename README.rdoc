@@ -1,3 +1,8 @@
+= streambot is discontinued
+
+streambot is **NOT** under active development. there will be no new versions, features or bugfixes.
+if you want to adopt streambot, feel free to fork.
+
 = Installation
 
 the streambot gem is available on rubygems.org[http://rubygems.org/gems/streambot]
