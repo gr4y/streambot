@@ -27,9 +27,7 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
-task :build_gem => [:test,:rdoc,:build]
-task :install_gem => [:build_gem,:install]
-task :default => [:check_dependencies,:rcov,:reek,:build_gem]
+task :default => [:check_dependencies,:reek,:build]
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
