@@ -10,13 +10,14 @@ begin
     gem.email = "swessel@gr4yweb.de"
     gem.homepage = "http://github.com/gr4y/streambot"
     gem.authors = ["Sascha Wessel"]
+    gem.version = File.read('VERSION')
     gem.post_install_message = File.exist?('USAGE.rdoc') ? File.read('USAGE.rdoc') : ""
     gem.require_path = 'lib'
     gem.files = %w(Rakefile) + Dir.glob("{lib}/**/*") + %w(VERSION)
     
     # Dependency for dealing with twitter streaming API
-    gem.add_dependency "tweetstream",">= 1.0.4"
-    gem.add_dependency "oauth",">= 0.4.0"
+    gem.add_runtime_dependency "twistream", ">= 0.2.0"
+    gem.add_runtime_dependency "oauth",">= 0.4.0"
     gem.add_development_dependency "webmock",">= 1.0.0"
     gem.add_development_dependency "rcov",">= 0.9.8"
     gem.add_development_dependency "reek",">= 1.2.8"
