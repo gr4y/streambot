@@ -6,7 +6,6 @@ require 'twistream'
 require 'logger'
 require 'yaml'
 
-require 'streambot/version'
 require 'streambot/event'
 require 'streambot/event_handler'
 require 'streambot/retweet'
@@ -18,5 +17,5 @@ module StreamBot
   LOG = Logger.new(STDOUT)
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
-  VERSION = StreamBot::Version::STRING
+  VERSION = ::File.exist?('VERSION') ? ::File.read('VERSION') : ""
 end
