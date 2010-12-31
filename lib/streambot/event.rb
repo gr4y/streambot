@@ -1,4 +1,5 @@
 module StreamBot
+  # event class
   class Event
     attr_reader :name
 
