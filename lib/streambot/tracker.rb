@@ -9,22 +9,28 @@ module StreamBot
 
     def initialize(params)
       self.params = params
-      @client = TwiStream::Client.new({:user => self.params["username"], :pass => self.params["password"]})
+      @retweet = StreamBot::Retweet.new(self.params)
+      @client = TwiStream::Client.new(authentication)
       @client.on_error do |msg, trace|
         on_error.trigger(msg, trace)
       end
     end
 
     def start
-      @client.filter_by_keywords(self.params["keywords"]) do |status|
-        puts status
+      keywords = self.params["keywords"]
+      @client.filter_by_keywords(keywords) do |status|
+        @retweet.retweet(status["id"])
       end
     end
 
     def stop
       @client.stop
     end
-
+    
+    private
+    def authentication
+      auth = self.params["auth"]
+      {:user => auth["username"], :pass => auth["password"]}
+    end
   end
-
 end
