@@ -1,10 +1,12 @@
 module StreamBot
   module EventHandler
 
+    # register an event with the given name
     def event(name)
       register_event(name)
     end
 
+    # register several events with the given names
     def events(* names)
       names.each do |name|
         event(name)
@@ -12,6 +14,7 @@ module StreamBot
     end
 
     private
+    # the real event registration
     def register_event(name)
       class_eval do
         variable =:"@#{name}"
