@@ -10,8 +10,19 @@ describe StreamBot::Tracker do
   describe "#start" do
     it "should start" do
       @tracker.start
-      sleep 1000
+    end
+  end
+  
+  describe "wait" do 
+    it "should sleep for 60 seconds" do 
+      sleep 60
+    end
+  end
+  
+  describe "#stop" do 
+    it "should stop" do 
       @tracker.stop
     end
   end
+  
 end
