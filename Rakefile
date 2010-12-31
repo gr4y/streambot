@@ -1,8 +1,7 @@
-require 'rubygems'
 require 'rake'
+require 'jeweler'
 
 begin
-  require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "streambot"
     gem.summary = %Q{retweeting tweets with specified keywords on twitter}
@@ -13,43 +12,23 @@ begin
     gem.post_install_message = File.exist?('USAGE.rdoc') ? File.read('USAGE.rdoc') : ""
     gem.require_path = 'lib'
     gem.files = %w(Rakefile) + Dir.glob("{lib}/**/*") + %w(VERSION)
+    # the runtime dependencies
+    gem.add_runtime_dependency "twistream", "~> 0.2.2"
+    gem.add_runtime_dependency "oauth","~> 0.4.0"
+    # the development dependencies
+    gem.add_development_dependency "bundler", "~> 1.0.0"
+    gem.add_development_dependency "rspec", [">= 2.0.0"]
+    gem.add_development_dependency "webmock","> 1.0.0"
+    gem.add_development_dependency "rcov","~> 0.9.8"
+    gem.add_development_dependency "reek","~> 1.2.8"
     
-    # Dependency for dealing with twitter streaming API
-    gem.add_dependency "tweetstream",">= 1.0.4"
-    gem.add_dependency "oauth",">= 0.4.0"
-    gem.add_development_dependency "webmock",">= 1.0.0"
-    gem.add_development_dependency "rcov",">= 0.9.8"
-    gem.add_development_dependency "reek",">= 1.2.8"
-    
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
-
-begin
-  require 'rcov/rcovtask'
-  Rcov::RcovTask.new do |test|
-    test.libs << 'test'
-    test.pattern = 'test/**/test_*.rb'
-    test.verbose = true
-  end
-rescue LoadError
-  task :rcov do
-    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
-  end
-end
-
-task :build_gem => [:test,:rdoc,:build]
-task :install_gem => [:build_gem,:install]
-task :default => [:check_dependencies,:rcov,:reek,:build_gem]
+task :test => :spec
+task :default => [:check_dependencies, :test, :reek, :build]
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
@@ -65,3 +44,6 @@ Reek::Rake::Task.new do |t|
   t.fail_on_error = false
   t.verbose = true
 end
+
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)

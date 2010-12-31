@@ -1,9 +1,0 @@
-params:
-  auth_type: oauth
-  http:
-    username: username
-    password: password
-  oauth:
-    key: consumer key
-    secret: consumer secret
-id: 12355936428

@@ -1,88 +1,36 @@
 module StreamBot
+
   # The Tracker class that provides a start and a stop method
   # This class has serveral callback methods
   class Tracker
-    extend StreamBot::Callbacks
-    callbacks :before_start, :before_match, :match_filter, :before_retweet
-    # the initialization method aka the constructor
-    def initialize(params, blacklist, * keywords)
-      LOG.debug("Tracker#initialize")
-      http_auth = params['http']
-      @stream = TweetStream::Client.new(http_auth['username'], http_auth['password'])
-      @stream.on_error do |message|
-        LOG.error "#{message}"
-        @stream.stop
+    extend StreamBot::EventHandler
+    events :on_error
+    attr_accessor :auth, :params
+
+    def initialize(params)
+      self.params = params
+      @retweet = StreamBot::Retweet.new(self.params)
+      @client = TwiStream::Client.new(authentication)
+      @client.on_error do |msg, trace|
+        on_error.trigger(msg, trace)
       end
-      # initializing retweet
-      @retweet = StreamBot::Retweet.new(params)
-      # get string with keywords comma separated keywords 
-      @keywords=keywords.join(',')
-      # set blacklist array if not nil
-      @blacklist=blacklist
-      if !@blacklist.nil?
-        warn "blacklisting is deprecated and will be removed with streambot 0.6.0"
-      end
-      @filters = params['filters']
     end
 
-    # start the bot
     def start
-      before_start
-      LOG.debug("Tracker#start")
-      # starting to track the keywords via tweetstream
-      @stream.track(@keywords) do |status|
-        # make status an instance variable for callbacks
-        @status = status
-        username = status.user.screen_name
-        matched = false
-        # if status.user is NOT in blacklist or filters don't match then retweet it
-        before_match
-        if (@blacklist.nil? || !@blacklist.include?(username)) && !@filters.nil?
-          @filters.each do |key, value|
-            matched = match?(status, value)
-            if matched == true
-              match_filter
-              LOG.debug("Tracker#start - filter #{key} matched!")
-              break
-            end
-          end
-        end
-        if matched == false
-          retweet(status)
-        end
+      keywords = self.params["keywords"]
+      @client.filter_by_keywords(keywords) do |status|
+        @retweet.retweet(status["id"])
       end
     end
 
-    # retweet the status
-    def retweet(status)
-      before_retweet
-      id = status.id
-      LOG.debug("Tracker#retweet - retweet ##{id} from @#{status.user.screen_name}")
-      @retweet.retweet(id)
-    end
-
-    # returns true if an filter is matching
-    def match?(status, filter)
-      @type = filter["type"]
-      @value = filter["value"]
-      if @type == "USER" then
-        status.user.screen_name.eql?(@value)
-      elsif @type == "CONTENT" then
-        status.text.include?(@value)
-      elsif @type == "LANGUAGE" then
-        status.user.lang.eql?(@value)
-      elsif @type == "SOURCE" then
-        # just a thought at this point:
-        # why the heck is html markup in the source field?
-        status.source.include?(@value)
-      elsif @type == "TIMEZONE" then
-        status.user.time_zone.eql?(@value)
-      end
-    end
-
-    # stop the bot
     def stop
-      @stream.stop
+      @client.stop
+    end
+    
+    private
+    def authentication
+      auth = self.params["auth"]
+      {:user => auth["username"], :pass => auth["password"]}
     end
   end
 end
