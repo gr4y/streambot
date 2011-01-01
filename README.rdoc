@@ -1,8 +1,3 @@
-= streambot is discontinued
-
-streambot is **NOT** under active development. there will be no new versions, features or bugfixes.
-if you want to adopt streambot, feel free to fork.
-
 = Installation
 
 the streambot gem is available on rubygems.org[http://rubygems.org/gems/streambot]
@@ -24,10 +19,10 @@ The full rdoc is available on rdoc.info[http://rdoc.info/projects/gr4y/streambot
 
     require 'streambot'
 
-    @params = { "oauth" => {"key" => "consumer key", "secret" => "consumer secret"},
-                "http" => {"username" => "username", "password" => "password"} }
-    @blacklist = ['mac_rt','apple_rt']
-    bot = StreamBot::Tracker.new(@params, @blacklist, 'apple','ipad','iphone os 4','steve jobs')
+	@params = { 'auth' => { 'username' => 'your username', 'password' => 'your password' },
+	 			'oauth' => { 'key' => 'your consumer key', 'secret' => 'your consumer secret' },
+	 			'keywords' => ['nowplaying'] }
+    bot = StreamBot::Tracker.new(@params)
     bot.start
 
 = Configuration
@@ -43,26 +38,9 @@ You need to register an application of the type desktop application on http://de
 *key*:: The consumer key Twitter provides you
 *secret*:: The consumer secret Twitter provides you
 
-=== http
+=== auth
 *username*:: Your login username
 *password*:: Your login password
-
-=== filters
-When a filter is matching on an status, then it won't be retweeted.
-
-*key*:: this should just hold an description of your filter
-*type*:: the type,
-*value*:: a string, thats the content that should be filtered
-
-----
-These types are actually supported:
-
-*USER*:: The users screenname/nickname *NOT* realname
-*SOURCE*:: The client which the user is using
-*LANGUAGE*:: The language that's set in users profile
-*TIMEZONE*:: The timezone that's set in users profile
-*CONTENT*:: A word the status text could include
-----
 
 I wrote this stuff into my config.yml and load the params with 
 
@@ -71,26 +49,17 @@ I wrote this stuff into my config.yml and load the params with
 
 == Callbacks
 
-Since version 0.5.0 streambot has an simple callback mechanism.
+*on_error*:: this callback is fired when an error occures
 
-*before_start*:: is fired before the tracker is running
-*before_match*:: is fired before we start the filtering
-*match_filter*:: is fired when an filter has matched
-*before_retweet*:: is fired before retweeting
-
-=== Examples
-==== before_match
-
-Before filtering we just want to print the status id to the console
-
-    bot = StreamBot::Tracker.new(@params, nil,'nowplaying')
-    bot.before_match do
-        status = bot.instance_variable_get("@status")
-        puts status.id
-    end
-    bot.start
-
-That's just an example. You can do anything you want to do here.
+=== Example
+	
+	@params = YAML.load_file('config.yml')
+	@client = StreamBot::Tracker.new(@params)
+	
+	@client.on_error do |msg, stacktrace|
+		puts msg
+		puts stacktrace
+	end
 
 = Contribution
 == Testing
