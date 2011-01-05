@@ -1,7 +1,8 @@
+require 'rubygems'
 require 'rake'
-require 'jeweler'
 
 begin
+  require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "streambot"
     gem.summary = %Q{retweeting tweets with specified keywords on twitter}
@@ -9,7 +10,6 @@ begin
     gem.email = "swessel@gr4yweb.de"
     gem.homepage = "http://github.com/gr4y/streambot"
     gem.authors = ["Sascha Wessel"]
-    gem.post_install_message = File.exist?('USAGE.rdoc') ? File.read('USAGE.rdoc') : ""
     gem.require_path = 'lib'
     gem.files = %w(Rakefile) + Dir.glob("{lib}/**/*") + %w(VERSION)
     # the runtime dependencies
@@ -17,18 +17,14 @@ begin
     gem.add_runtime_dependency "oauth","~> 0.4.0"
     # the development dependencies
     gem.add_development_dependency "bundler", "~> 1.0.0"
-    gem.add_development_dependency "rspec", [">= 2.0.0"]
-    gem.add_development_dependency "webmock","> 1.0.0"
+    gem.add_development_dependency "rspec", [">= 2.4.0"]
+    gem.add_development_dependency "webmock","~> 1.0.0"
     gem.add_development_dependency "rcov","~> 0.9.8"
     gem.add_development_dependency "reek","~> 1.2.8"
-    
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
-
-task :test => :spec
-task :default => [:check_dependencies, :test, :reek, :build]
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
@@ -47,3 +43,6 @@ end
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
+
+task :test => [:check_dependencies, :spec]
+task :default => [:test, :reek, :build]
