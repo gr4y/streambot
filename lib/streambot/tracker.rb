@@ -4,7 +4,7 @@ module StreamBot
   # This class has serveral callback methods
   class Tracker
     extend StreamBot::EventHandler
-    events :on_error
+    events :on_error, :on_match
     attr_accessor :auth, :params
 
     def initialize(params)
@@ -18,11 +18,16 @@ module StreamBot
 
     def start
       keywords = self.params["keywords"]
+      filters = self.params["filters"]
       @client.filter_by_keywords(keywords) do |status|
-        @retweet.retweet(status["id"])
+        # one thread per retweet, 
+        # cause it's much, much faster
+        @thread = Thread.new do
+          @retweet.retweet(status["id"])
+        end
       end
     end
-
+    
     def stop
       @client.stop
     end
