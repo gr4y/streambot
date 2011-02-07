@@ -11,6 +11,7 @@ require 'streambot/event_handler'
 require 'streambot/retweet'
 require 'streambot/handler'
 require 'streambot/oauth'
+require 'streambot/array_path'
 require 'streambot/tracker'
 
 module StreamBot
