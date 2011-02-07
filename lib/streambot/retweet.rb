@@ -8,7 +8,7 @@ module StreamBot
 
     # retweets the status with given id
     def retweet(id)
-      @handler.post("/statuses/retweet/#{id}.json",nil)
+      @handler.post("/statuses/retweet/#{id}.json", nil)
     end
   end
 end
