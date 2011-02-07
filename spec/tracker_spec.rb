@@ -5,6 +5,12 @@ describe StreamBot::Tracker do
   before :all do
     params = YAML.load_file('spec/params.yml')
     @tracker = StreamBot::Tracker.new(params)
+    @tracker.on_error do |msg, trace|
+      puts "#{msg}: #{trace}"
+    end
+    @tracker.on_match do |status, filter_path, filter_value|
+      puts "filter matched on #{filter_path} with #{filter_value} in status ##{status['id']}"
+    end
   end
   
   describe "#start" do
