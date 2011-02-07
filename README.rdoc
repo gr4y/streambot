@@ -7,7 +7,7 @@ to get streambot installed, you simply need to run
 
     gem install streambot
 
-== beta release
+== development release
 
     gem install streambot --pre
 
@@ -42,17 +42,43 @@ You need to register an application of the type desktop application on http://de
 *username*:: Your login username
 *password*:: Your login password
 
+=== keywords 
+:: the list of keywords as an array
+
+=== filters_config
+:: the path to the filters.yml file
+
 I wrote this stuff into my config.yml and load the params with 
 
 	require 'yaml'
 	@params = YAML.load_file('config.yml')
 
-== Callbacks
+= Callbacks
 
 *on_error*:: this callback is fired when an error occures
 
-=== Example
-	
+= Filters
+
+You need to configure the *filters_config* in the params and set the path to the YAML file. At the moment this needs to be an YAML file, cause the tracker is reading this file, every time a new status comes in via the client. I decided to read it on each status, cause I don't wanted to restart the Tracker every time I made a change to the filters.
+
+For example we want to filter all tweets with the source "web", we need to define the following line in our *filters.yml*
+
+	"source": "web"
+
+The Tracker checks if the field "source" of the incoming status *includes* OR *is equal* to "web". If you want to filter more than one source, you simply need to write it this way:
+
+	"source": ["web", "TweetDeck"]
+
+You can define all fields inside the status object. You want to filter tweets by me, so you need to define
+
+	"user/screen_name": "gr4y"
+
+You can even filter all tweets of users with an evil background color.
+
+	"user/profile_background_color": "666666"
+
+= Example
+
 	@params = YAML.load_file('config.yml')
 	@client = StreamBot::Tracker.new(@params)
 	
