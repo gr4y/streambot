@@ -27,6 +27,7 @@ module StreamBot
           @thread = Thread.new do
             @retweet.retweet(status["id"])
           end
+          @thread.join
         end
       end
     end
