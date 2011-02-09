@@ -15,13 +15,15 @@ describe StreamBot::Tracker do
   
   describe "#start" do
     it "should start" do
-      @tracker.start
+      @thread = Thread.new do 
+        @tracker.start
+      end
     end
   end
   
   describe "wait" do 
     it "should sleep for 60 seconds" do 
-      sleep 60
+      sleep 10
     end
   end
   
