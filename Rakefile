@@ -13,7 +13,7 @@ begin
     gem.require_path = 'lib'
     gem.files = %w(Rakefile) + Dir.glob("{lib}/**/*") + %w(VERSION)
     # the runtime dependencies
-    gem.add_runtime_dependency "twistream", "~> 0.2.4"
+    gem.add_runtime_dependency "twistream", "~> 0.2.5"
     gem.add_runtime_dependency "oauth","~> 0.4.0"
     # the development dependencies
     gem.add_development_dependency "bundler", "~> 1.0.0"
