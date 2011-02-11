@@ -4,16 +4,19 @@ module StreamBot
     attr_reader :name
 
     def initialize(name)
+      LOG.debug "initialize: #{name}"
       @name = name
     end
 
-    def handle(method=nil, & block)
-      @handler = method if method
-      @handler = block if block
+    def receive(method=nil, & block)
+      LOG.debug "receive: #{self.name}" 
+      @handler = method if !method.nil?
+      @handler = block if !block.nil?
     end
 
     def trigger(* args)
-      @handler.call(* args) if !@handler.nil?
+      LOG.debug "trigger: #{self.name}"
+      @handler.call(*args) if !@handler.nil?
     end
   end
 end
