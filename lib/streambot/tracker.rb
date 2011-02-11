@@ -4,7 +4,7 @@ module StreamBot
   # This class has serveral callback methods
   class Tracker
     extend StreamBot::EventHandler
-    events :on_error, :on_match
+    events :on_error, :on_match, :before_retweet, :after_retweet
     attr_accessor :auth, :params
 
     # initializes the tracker
@@ -24,10 +24,11 @@ module StreamBot
         if retweet?(status)
           # one thread per retweet, 
           # cause it's much, much faster
+          before_retweet.trigger(status)
           @thread = Thread.new do
             @retweet.retweet(status["id"])
           end
-          @thread.join
+          after_retweet.trigger(status)
         end
       end
     end
@@ -64,11 +65,10 @@ module StreamBot
         filters.each_pair do |path, value|
           array = []
           array << value
-          array.flatten.each do |aValue|
-            path_value = ArrayPath.get_path(status, path)
-            if path_value.eql?(aValue) || path_value.include?(aValue)
-              LOG.info "filter matched on #{path} with #{aValue} in status ##{status['id']}"
-              on_match.trigger(status)
+          array.flatten.each do |filter_value|
+            path_value = StreamBot::ArrayPath.get_path(status, path)
+            if path_value.eql?(filter_value) || path_value.include?(filter_value)
+              on_match.trigger(status, path, filter_value)
               retweet = false
             end
           end
