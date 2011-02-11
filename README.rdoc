@@ -53,9 +53,51 @@ I wrote this stuff into my config.yml and load the params with
 	require 'yaml'
 	@params = YAML.load_file('config.yml')
 
-= Callbacks
+= Events / Callbacks
 
-*on_error*:: this callback is fired when an error occures
+To receive something from an event, you need to call the receive method on the event and pass a block into this method
+
+	tracker.event_name.receive do |params|
+		# ...
+	end
+
+== on_error
+
+is fired when an error occures
+
+	tracker.on_error.receive do |message, trace|
+		# print the error message and the stacktrace to STDOUT
+		puts message
+		puts trace
+		# and stop the tracker
+		tracker.stop
+	end
+
+== on_match
+
+is fired wenn an filter matched on an status
+
+	tracker.on_match.receive do |status, filter_path, filter_value|
+		puts "filter matched on #{filter_path} with #{filter_value} in status ##{status['id']}"
+	end
+
+== before_retweet
+
+is fired before the tracker retweets a status
+
+	tracker.before_retweet.receive do |status|
+		# print the status to STDOUT
+		puts status
+	end
+
+== after_retweet
+
+is fired after the tracker has retweeted a status
+
+	tracker.after_retweet.receive do |status|
+		# save the status with active record
+		Retweet.new(status)
+	end
 
 = Filters
 
@@ -76,16 +118,6 @@ You can define all fields inside the status object. You want to filter tweets by
 You can even filter all tweets of users with an evil background color.
 
 	"user/profile_background_color": "666666"
-
-= Example
-
-	@params = YAML.load_file('config.yml')
-	@client = StreamBot::Tracker.new(@params)
-	
-	@client.on_error do |msg, stacktrace|
-		puts msg
-		puts stacktrace
-	end
 
 = Contribution
 == Testing
