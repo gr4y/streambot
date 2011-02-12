@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{streambot}
-  s.version = "1.0.0.rc4"
+  s.version = "1.0.0"
 
-  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sascha Wessel"]
-  s.date = %q{2011-02-11}
+  s.date = %q{2011-02-12}
   s.description = %q{a simple gem that tracks several keywords via twitter streaming api and re-publish it on twitter}
   s.email = %q{swessel@gr4yweb.de}
   s.extra_rdoc_files = [
