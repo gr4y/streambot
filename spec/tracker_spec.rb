@@ -15,7 +15,7 @@ describe StreamBot::Tracker do
   
   describe "#start" do
     it "should start" do
-      @thread = Thread.new do 
+      Thread.new do 
         @tracker.start
       end
     end
