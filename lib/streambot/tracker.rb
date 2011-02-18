@@ -12,7 +12,8 @@ module StreamBot
       self.params = params
       @retweet = StreamBot::Retweet.new(self.params)
       @client = TwiStream::Client.new(authentication)
-      @client.on_error do |msg, trace|
+      @client.on_error.handle do |msg, trace|
+        LOG.error "#{msg}"
         on_error.trigger(msg, trace)
       end
     end
@@ -20,17 +21,16 @@ module StreamBot
     # start the tracker
     def start
       keywords = self.params["keywords"]
-      @client.filter_by_keywords(keywords) do |status|
-        if retweet?(status)
-          # one thread per retweet, 
-          # cause it's much, much faster
-          before_retweet.trigger(status)
-          @thread = Thread.new do
+      @thread = Thread.new do 
+        @client.filter_by_keywords(keywords) do |status|
+          if retweet?(status)
+            before_retweet.trigger(status)
             @retweet.retweet(status["id"])
+            after_retweet.trigger(status)
           end
-          after_retweet.trigger(status)
         end
       end
+      @thread.join
     end
     
     # stop the tracker
