@@ -1,6 +1,13 @@
 .project
+
 .idea
 pkg
+
 *.yml
 coverage
+
 rdoc
+doc
+.yardoc
+
+Gemfile.lock
