@@ -19,8 +19,9 @@ Gem::Specification.new do |s|
   s.add_dependency "twistream", "~> 0.3.0"
   s.add_dependency "oauth", "~> 0.4.5"
 
+  s.add_development_dependency "rake"
+  s.add_development_dependency "bundler"
   s.add_development_dependency "yard", "~> 0.7.2"
-  s.add_development_dependency "bundler", "~> 1.0.0"
   s.add_development_dependency "rspec", ">= 2.4.0"
   s.add_development_dependency "webmock", "~> 1.0.0"
 
