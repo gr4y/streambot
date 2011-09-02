@@ -9,5 +9,3 @@ coverage
 rdoc
 doc
 .yardoc
-
-Gemfile.lock
